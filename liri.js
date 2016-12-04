@@ -64,7 +64,6 @@ function getSpotify(t) {
         	return;
     	}
 
-    	console.log(trackTitle);
  		console.log("Artist: " + data.tracks.items[0].artists[0].name + "\n" + 
  			        "Song Name: " + data.tracks.items[0].name + "\n" + 
    				    "Preview Link: "+ data.tracks.items[0].preview_url + "\n" + 
@@ -79,7 +78,6 @@ function getSpotify(t) {
         	return;
     	}
 	
-		console.log(trackTitle);
    		console.log("Artist: " + data.tracks.items[0].artists[0].name + "\n" + 
  			        "Song Name: " + data.tracks.items[0].name + "\n" + 
    				    "Preview Link: "+ data.tracks.items[0].preview_url + "\n" + 
@@ -94,7 +92,6 @@ function getOMDB(t) {
 	var omdbQuery;
 
 	if(movieTitle === undefined) {
-		console.log(movieTitle);
 		omdbQuery = "http://www.omdbapi.com/?t=" + "Mr. Nobody" + "&y=&plot=short&r=json&tomatoes=true";
 		request(omdbQuery, function(error, response, body) {
   			if (!error && response.statusCode == 200) {
