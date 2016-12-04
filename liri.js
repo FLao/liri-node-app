@@ -1,5 +1,5 @@
 var command = process.argv[2];
-var tTitle = process.argv[3];
+var lookup = process.argv[3];
 
 var tKeys = require("./keys.js");
 var Twitter = require('twitter');
@@ -13,25 +13,27 @@ switch(command) {
 		break;
 	
 	case 'spotify-this-song':
-		getSpotify(tTitle);
+		getSpotify(lookup);
 		break;
 
 	case 'movie-this':
-		getOMDB(tTitle);
+		getOMDB(lookup);
 		break;
 	
 	case 'do-what-it-says':
 		fs.readFile("random.txt", "utf8", function(err, data) {
     		data = data.split(",");
+    		randomCommand = data[0];
+    		randomLookup = data[1];
     		
-    		if(data[0] === 'my-tweets')
+    		if(randomCommand === 'my-tweets')
     			getTwitter();
 
-    		else if(data[0] === 'spotify-this-song')
-    			getSpotify(data[1]);   
+    		else if(randomCommand === 'spotify-this-song')
+    			getSpotify(randomLookup);   
 
-    		else if(data[0] === 'movie-this')
-    			getOMDB(data[1]); 			
+    		else if(randomCommand === 'movie-this')
+    			getOMDB(randomLookup); 			
   		});
 		break;
 }
@@ -53,9 +55,9 @@ function getTwitter() {
 	});
 }
 
-function getSpotify(t) {
+function getSpotify(argvLookup) {
 
-	var trackTitle = t;
+	var trackTitle = argvLookup;
 
 	if(trackTitle === undefined) {
 		spotify.search({ type: 'track', query: 'ace of base the sign' }, function(err, data) {
@@ -86,9 +88,9 @@ function getSpotify(t) {
 	}
 }
 
-function getOMDB(t) {
+function getOMDB(argvLookup) {
 
-	var movieTitle = t;
+	var movieTitle = argvLookup;
 	var omdbQuery;
 
 	if(movieTitle === undefined) {
@@ -109,7 +111,6 @@ function getOMDB(t) {
 	}
 
 	else {
-		console.log(movieTitle);
 		var omdbQuery = "http://www.omdbapi.com/?t=" + movieTitle + "&y=&plot=short&r=json&tomatoes=true";
 		request(omdbQuery, function(error, response, body) {
   			if (!error && response.statusCode == 200) {
