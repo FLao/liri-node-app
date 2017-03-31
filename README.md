@@ -5,5 +5,5 @@
 Instructions:
 <ol>
 <li>npm install for dependancies</li>
-<li>open using browser localhost:8080</li>
+<li>run a command using "node liri my-tweets", "node liri spotify-this-song", "node liri movie-this", or "node liri do-what-it-says"</li>
 </ol>
